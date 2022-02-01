@@ -13,41 +13,35 @@ const AddCampaign = () => {
 
     const test= (e) => {
         e.preventDefault();
-        // const newCampaign = {
-        //     id:id,
-        //     name: name,
-        //     startDate: startDate,
-        //     endDate: endDate,
-        //     budget: budget
-        // }
-        let tempo = JSON.parse(JSON.stringify(campaigns.value))
-        // console.log(values)
-        tempo.push(values);
-        dispatch(setCampaigns(tempo))
+
+        let newCampArr = [...campaigns.value]
+        newCampArr.push(values);
+        
+        dispatch(setCampaigns(newCampArr))
         setValues({});
     }
 
     const validate =(e, name, value) => {
         switch(name) {
-            case 'campaignId' :
+            case 'id' :
                 if(isNaN(value)) {
                     setErrors({
                         ...errors,
-                        campaignId: 'Please enter a number'
+                        id: 'Please enter a number'
                     })
                 } else {
-                    delete errors['campaignId'];
+                    delete errors['id'];
                     setErrors(errors)
                 }
                 break;
-            case 'userName':
+            case 'name':
                 if(value.length < 3) {
                     setErrors({
                         ...errors,
-                        userName: 'Please enter full name'
+                        name: 'Please enter full name'
                     })
                 } else {
-                    delete errors['userName'];
+                    delete errors['name'];
                     setErrors(errors);
                 }
                 break;
@@ -113,12 +107,12 @@ const AddCampaign = () => {
         <div className='add-campaign-cont'>
             <form noValidate onSubmit={test}>
                 <div className='input-group'>
-                    <input name='campaignId' type='text' placeholder="Enter id" required onChange={handleChange} />
-                    {errors.campaignId && <p className='error-msg'>{errors.campaignId}</p>}
+                    <input name='id' type='text' placeholder="Enter id" required onChange={handleChange} />
+                    {errors.id && <p className='error-msg'>{errors.id}</p>}
                 </div>
                 <div>
-                    <input name='userName' type='text' placeholder="Enter name" required onChange={handleChange} />
-                    {errors.userName && <p className='error-msg'>{errors.userName}</p>}
+                    <input name='name' type='text' placeholder="Enter name" required onChange={handleChange} />
+                    {errors.name && <p className='error-msg'>{errors.name}</p>}
                 </div>
                 <div>
                     <input name='startDate' type='date' placeholder="Start date" required onChange={handleChange} />
