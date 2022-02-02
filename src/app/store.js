@@ -1,10 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import logger from 'redux-logger'
 
-import campaignsReducer from '../features/campaigns'
+import campaignsReducer from '../features/campaignSlice'
+import searchReducer from '../features/searchSlice'
 
 export default configureStore({
     reducer: {
         campaigns: campaignsReducer,
-        campaignsFilter: campaignsReducer
+        search: searchReducer 
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 })

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import '../../styles/addCampaign.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { setCampaigns } from "../../features/campaigns";
+import { setCampaigns } from "../../features/campaignSlice";
 
 const AddCampaign = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const AddCampaign = () => {
 
         let newCampArr = [...campaigns.value]
         newCampArr.push(values);
-        
+
         dispatch(setCampaigns(newCampArr))
         setValues({});
     }

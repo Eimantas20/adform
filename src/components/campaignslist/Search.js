@@ -1,7 +1,8 @@
 import { useState } from "react"
 import '../../styles/search.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { setCampaigns } from "../../features/campaigns";
+import { setCampaigns, searchUsers } from "../../features/campaignSlice";
+import{setSearch} from '../../features/searchSlice'
 // import { customFilter } from "../../features/customFilter";
 
 export const customFilter = (selectedDateTmst) => {
@@ -52,16 +53,21 @@ export const testingapp = (campaigns, selectedDateTmst) => {
 
 
 
-const Search = (props) => {
+const Search = () => {
     const [ startDate, setStartDate ] = useState('');
     const [ endDate, setEndDate ] = useState('');
     const [ name, setName ] = useState('');
     const dispatch = useDispatch();
     const campaigns = useSelector(state => state.campaignsFilter)
+    const state = useSelector(state => state)
+    console.log(state)
+
+
 
     const handleChange = (e) =>{
         let selectedDateTmst = e.target.value ? Date.parse(e.target.value) / 1000 : 0
         // customFilter(selectedDateTmst)
+        dispatch(setSearch(selectedDateTmst))
         testingapp(campaigns, selectedDateTmst )
     }
 

@@ -8,7 +8,7 @@
 //         .then(response => response.json())
 //         .then(data => console.log(data))
 // }
-import { setCampaigns } from "./campaigns"
+import { setCampaigns } from "./campaignSlice"
 import { useDispatch } from "react-redux"
 
 // const dispatch = useDispatch();
