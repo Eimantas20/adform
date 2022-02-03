@@ -1,7 +1,7 @@
 import { useState } from "react";
-import '../../styles/addCampaign.scss';
+import '../../../styles/addCampaign.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { setCampaigns } from "../../features/campaigns";
+import { setCampaigns } from "../../../features/campaignSlice";
 
 const AddCampaign = () => {
     const dispatch = useDispatch();
@@ -9,45 +9,44 @@ const AddCampaign = () => {
 
     const [ values, setValues ] = useState({});
     const [ errors, setErrors ] = useState({});
- 
 
-    const test= (e) => {
+    const handleSubmit= (e) => {
         e.preventDefault();
-        // const newCampaign = {
-        //     id:id,
-        //     name: name,
-        //     startDate: startDate,
-        //     endDate: endDate,
-        //     budget: budget
-        // }
-        let tempo = JSON.parse(JSON.stringify(campaigns.value))
-        // console.log(values)
-        tempo.push(values);
-        dispatch(setCampaigns(tempo))
+
+        const newCampaign = {...values}
+        if (!newCampaign.name || newCampaign.name === '') {
+            newCampaign.name = 'Unknown user'
+        };
+
+        let newCampArr = [...campaigns.value]
+        newCampArr.push(newCampaign);
+
+        dispatch(setCampaigns(newCampArr))
         setValues({});
+        e.target.reset();
     }
 
     const validate =(e, name, value) => {
         switch(name) {
-            case 'campaignId' :
+            case 'id' :
                 if(isNaN(value)) {
                     setErrors({
                         ...errors,
-                        campaignId: 'Please enter a number'
+                        id: 'Please enter a number'
                     })
                 } else {
-                    delete errors['campaignId'];
+                    delete errors['id'];
                     setErrors(errors)
                 }
                 break;
-            case 'userName':
-                if(value.length < 3) {
+            case 'name':
+                if(value.length <= 3 && value.length > 0) {
                     setErrors({
                         ...errors,
-                        userName: 'Please enter full name'
+                        name: 'Please enter full name'
                     })
                 } else {
-                    delete errors['userName'];
+                    delete errors['name'];
                     setErrors(errors);
                 }
                 break;
@@ -95,40 +94,40 @@ const AddCampaign = () => {
             default: break;
         }
     }
+
     const handleChange = (e) => {
         e.preventDefault();
 
         let name = e.target.name;
         let value = e.target.value;
 
-        validate(e, name, value)
-
+        validate(e, name, value);
         setValues({
             ...values,
             [name]: value
-        })
+        });
     }
 
     return(
         <div className='add-campaign-cont'>
-            <form noValidate onSubmit={test}>
+            <form onSubmit={handleSubmit}>
                 <div className='input-group'>
-                    <input name='campaignId' type='text' placeholder="Enter id" required onChange={handleChange} />
-                    {errors.campaignId && <p className='error-msg'>{errors.campaignId}</p>}
+                    <input name='id' type='text' placeholder="Enter id" required onChange={handleChange} />
+                    {errors.id && <p className='error-msg'>{errors.id}</p>}
                 </div>
-                <div>
-                    <input name='userName' type='text' placeholder="Enter name" required onChange={handleChange} />
-                    {errors.userName && <p className='error-msg'>{errors.userName}</p>}
+                <div className='input-group'>
+                    <input name='name' type='text' placeholder="Enter name" onChange={handleChange} />
+                    {errors.name && <p className='error-msg'>{errors.name}</p>}
                 </div>
-                <div>
-                    <input name='startDate' type='date' placeholder="Start date" required onChange={handleChange} />
+                <div className='input-group'>
+                    <input name='startDate' type='date' placeholder="Start date" required onChange={handleChange} max={values.endDate} />
                     {errors.startDate && <p className='error-msg'>{errors.startDate}</p>}
                 </div>
-                <div>
-                    <input name='endDate' type='date' placeholder="End date" required onChange={handleChange} />
+                <div className='input-group'>
+                    <input name='endDate' type='date' placeholder="End date" required onChange={handleChange} min={values.startDate} />
                     {errors.endDate && <p className='error-msg'>{errors.endDate}</p>}
                 </div>
-                <div>
+                <div className='input-group'>
                     <input name='budget' type='text' placeholder="Budget" required onChange={handleChange} />
                     {errors.budget && <p className='error-msg'>{errors.budget}</p>}
                 </div>

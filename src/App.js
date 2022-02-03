@@ -1,5 +1,4 @@
-// import './App.css';
-import CampaignsList from './components/campaignslist/CampaignsList';
+import CampaignsList from './components/campaign/CampaignsList';
 import './styles/app.scss';
 
 function App() {
