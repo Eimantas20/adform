@@ -1,6 +1,5 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
-import logger from 'redux-logger'
-
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
 import campaignsReducer from '../features/campaignSlice'
 import searchReducer from '../features/searchSlice'
 

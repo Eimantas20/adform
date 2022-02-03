@@ -1,4 +1,9 @@
 .add-campaign-cont {
+    form {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     .input-group {
         position: relative;
     }
@@ -12,5 +17,27 @@
         background-color: #ffe0e0;
         border-radius: 5px;
         padding: 5px;
+        top: 40%;
+        z-index: 100;
     }
+
+    button{
+        height:fit-content;
+        padding: 0.5rem 1rem;
+        border-radius: 30px;
+        background-color: #f3f3f3;
+    }
+}
+
+input[type="date"]:not(:valid) {
+    color:#747474;
+}
+
+input {
+    box-sizing: border-box;
+    margin: 0 1rem 1rem 0;
+    height: 30px;
+    padding: 0 1rem;
+    border-radius: 30px;
+    border: 1px solid #f1f1f1;
 }

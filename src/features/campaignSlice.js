@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialStateCampaigns = {
     isPending: false,
     value: [],
-    eroor:'',
-    search: ''
+    error:false,
+    errorMsg: ''
 }
 
 export const campaignSlice = createSlice({
@@ -13,12 +13,19 @@ export const campaignSlice = createSlice({
     reducers: {
         setCampaigns: (state, action) => {
             state.value = action.payload;
-            state.isPending = false
-
+            state.isPending = false;
+            state.error = false;
         },
+        isPending: (state, action) => {
+            state.isPending = true;
+            state.error = false;
+        },
+        gotError: (state, action) => {
+            state.isPending=false;
+            state.error = true;
+            state.errorMsg = action.payload;
+        }
     }
 })
-export const { setCampaigns } = campaignSlice.actions
+export const { setCampaigns, isPending, gotError } = campaignSlice.actions
 export default campaignSlice.reducer
-
-

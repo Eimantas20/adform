@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const initialStateSearch = {
-    value: 0
+    value: {
+        startDate: 0,
+        endDate: 0,
+        nameFilter: ''
+    }
 }
 
 export const searchSlice = createSlice({
