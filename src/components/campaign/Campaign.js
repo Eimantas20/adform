@@ -1,23 +1,25 @@
 import '../../styles/campaign.scss';
+import moment from 'moment';
 
-const Campaign = ({ campaign, todaysTimeStmp }) => {
+const Campaign = ({ campaign, todaysMoment }) => {
     let status = '';
-    const currency = 'USD'
+    const currency = 'USD';
+    const campaignString = 'Campaign';
 
-    if (((Date.parse(campaign.startDate) / 1000) <= todaysTimeStmp) && (todaysTimeStmp <= (Date.parse(campaign.endDate) / 1000))) {
+    if (moment(campaign.startDate).isSameOrBefore(todaysMoment, 'day') && (moment(campaign.endDate).isSameOrAfter(todaysMoment, 'day'))) {
         status = 'active';
-    } else {
+    }else {
         status = 'inactive'
     }
  
     return(
         <div className="grid-temp">
-            <p>{`Campaign ${campaign.id}`}</p>
+            <p>{campaignString} {campaign.id}</p>
             <p>{campaign.name}</p>
             <p>{campaign.startDate}</p>
             <p>{campaign.endDate}</p>
             <p className={status}>{status}</p>
-            <p>{`${campaign.budget} ${currency}`}</p>
+            <p>{campaign.budget} {currency}</p>
         </div> 
     )
 }

@@ -13,8 +13,13 @@ const AddCampaign = () => {
     const handleSubmit= (e) => {
         e.preventDefault();
 
-        const newCampaign = {...values}
-        if (!newCampaign.name || newCampaign.name === '') {
+        if (Object.keys(errors).length) {
+            return
+        }
+
+        const newCampaign = {...values};
+
+        if (!newCampaign.name) {
             newCampaign.name = 'Unknown user'
         };
 
@@ -81,7 +86,7 @@ const AddCampaign = () => {
                 }
                 break;
             case 'budget':
-                if (isNaN(value)) {
+                if ((isNaN(value)) || (value <= 0)) {
                     setErrors({
                         ...errors,
                         budget: 'Please enter amout'
