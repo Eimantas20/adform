@@ -7,13 +7,13 @@ import AddCampaign from "./addCampaign/AddCampaign";
 import { modifyResponse } from "../../features/modifyResponse";
 import Error from "../error/Error";
 import Campaign from "./Campaign";
+import moment from "moment";
 
 const CampaignsList = () => {
     const dispatch = useDispatch();
     const campaigns = useSelector((state) => state.campaigns);
     const search = useSelector((state)=>state.search);
-    const timeStmp = new Date();
-    const todaysTimeStmp = Date.parse(`${timeStmp.getFullYear()}-${timeStmp.getMonth() + 1}-${timeStmp.getDate()}`) / 1000;
+    const todaysMoment = moment();
 
     useEffect(()=> {
          fetchData();
@@ -90,7 +90,7 @@ const CampaignsList = () => {
                         <p>Budget</p>
                     </div>
                     {campaigns.isPending ? <h1>Loading</h1> : filteredCampaigns.map((campaign, i) =>(
-                        <Campaign key={i} campaign={campaign} todaysTimeStmp={todaysTimeStmp} />
+                        <Campaign key={i} campaign={campaign} todaysMoment={todaysMoment} />
                     ))}
                     <AddCampaign />
                 </>
