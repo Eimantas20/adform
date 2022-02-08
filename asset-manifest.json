@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/adform/static/css/main.a71fa386.css",
-    "main.js": "/adform/static/js/main.ef9fcc4d.js",
+    "main.js": "/adform/static/js/main.21bc8ce3.js",
     "index.html": "/adform/index.html",
     "main.a71fa386.css.map": "/adform/static/css/main.a71fa386.css.map",
-    "main.ef9fcc4d.js.map": "/adform/static/js/main.ef9fcc4d.js.map"
+    "main.21bc8ce3.js.map": "/adform/static/js/main.21bc8ce3.js.map"
   },
   "entrypoints": [
     "static/css/main.a71fa386.css",
-    "static/js/main.ef9fcc4d.js"
+    "static/js/main.21bc8ce3.js"
   ]
 }
